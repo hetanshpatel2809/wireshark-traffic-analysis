@@ -1,0 +1,83 @@
+# Network Traffic Analysis Report
+
+## 1. Objective
+To capture live network packets using Wireshark and identify common network protocols and traffic types.
+
+## 2. Tools and Environment
+- Tool: Wireshark
+- Capture interface: eth0
+- Environment recorded in capture metadata: Kali Linux
+- Link-layer type: Ethernet
+- Capture format: PCAPNG (original), PCAP (exported)
+
+## 3. Capture Summary
+
+| Detail | Result |
+|---|---|
+| Total packets | 1,822 |
+| Capture duration | Approximately 43 seconds |
+| Local IP observed | 10.0.2.5 |
+| DNS resolver observed | 192.168.0.1 |
+
+## 4. Protocols Identified
+
+| Protocol | Packets | Observation |
+|---|---:|---|
+| UDP | 1,048 | Datagram communication |
+| TCP | 756 | Connection-oriented communication |
+| ICMP | 16 | Ping requests and replies |
+| ARP | 2 | Local address resolution |
+
+### DNS Analysis
+- Total DNS packets: 66
+- Requests: 33
+- Responses: 33
+- Observed domains included `www.google.com` and Mozilla services.
+
+### TCP Analysis
+TCP packets were observed communicating through port 443, among other ports. TCP provides reliable, connection-oriented data transmission.
+
+### TLS Analysis
+TLS record signatures were identified in TCP payloads, indicating encrypted communication.
+
+### ICMP Analysis
+- 8 Echo Requests
+- 8 Echo Replies
+
+These packets are consistent with ping activity.
+
+### ARP Analysis
+ARP packets were observed, which are used to resolve IPv4 addresses into MAC addresses on a local network.
+
+## 5. Wireshark Display Filters
+
+| Filter | Purpose |
+|---|---|
+| `dns` | Display DNS packets |
+| `tcp` | Display TCP packets |
+| `udp` | Display UDP packets |
+| `tls` | Display TLS packets |
+| `icmp` | Display ICMP packets |
+| `arp` | Display ARP packets |
+
+## 6. Key Findings
+1. DNS requests and responses were exchanged with the local DNS resolver.
+2. TCP and UDP traffic using port 443 was present.
+3. TLS-related records were identified in TCP traffic.
+4. ICMP Echo Requests and Replies were observed.
+5. ARP packets were present for local network address resolution.
+
+## 7. Result
+A total of 1,822 packets were analyzed. The capture contained UDP, TCP, ICMP, and ARP traffic, along with DNS and TLS-related communication.
+
+## 8. Limitations
+- The capture lasted approximately 43 seconds.
+- Encrypted TLS application data cannot generally be read as plain text.
+- UDP port 443 may carry QUIC, so port 443 alone does not prove HTTPS.
+- The analysis is limited to the supplied packet capture.
+
+## 9. Conclusion
+This practical exercise demonstrated how Wireshark can capture and analyze network traffic. It provided practical experience in identifying protocols, examining packet details, applying display filters, and understanding basic network communication.
+
+## 10. Disclaimer
+This exercise was performed for educational and cybersecurity learning purposes.
